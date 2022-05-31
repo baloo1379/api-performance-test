@@ -1,0 +1,32 @@
+type Book {
+    id: ID!
+    title: String
+    authors: String
+    average_rating: Float
+    isbn: String
+    isbn13: String
+    language_code: String
+    num_pages: Int
+    ratings_count: Int
+    text_reviews_count: Int
+    publication_date: String
+    publisher: Int
+}
+
+type Song {
+    id: ID!
+    title: String
+    artist: String
+    top_genre: String
+    year: String
+    bpm: Int
+    nrgy: Int
+    dnce: Int
+    d_b: Int
+    live: Int
+    val: Int
+    dur: Int
+    acous: Int
+    spch: Int
+    pop: Int
+}

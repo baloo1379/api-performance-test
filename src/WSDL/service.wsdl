@@ -1,0 +1,173 @@
+<definitions xmlns:tns="pl.baloo.magisterka.wsdl"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             name="let you retrieve online message by SOAP protocol"
+             targetNamespace="pl.baloo.magisterka.wsdl">
+    <!--  definition of datatypes  -->
+    <types>
+        <schema xmlns="http://www.w3.org/2000/10/XMLSchema" targetNamespace="pl.baloo.magisterka.xsd">
+            <element name="array">
+                <complexType>
+                    <choice>
+                        <element name="books" type="xsd:anyType" maxOccurs="unbounded"/>
+                        <element name="songs" type="xsd:anyType" maxOccurs="unbounded"/>
+                    </choice>
+                </complexType>
+            </element>
+            <element name="book">
+                <complexType>
+                    <choice>
+                        <element name="id" type="xsd:int"/>
+                        <element name="title" type="xsd:string"/>
+                        <element name="authors" type="xsd:string"/>
+                        <element name="average_rating" type="xsd:float"/>
+                        <element name="isbn" type="xsd:string"/>
+                        <element name="isbn13" type="xsd:string"/>
+                        <element name="language_code" type="xsd:string"/>
+                        <element name="num_pages" type="xsd:int"/>
+                        <element name="ratings_count" type="xsd:int"/>
+                        <element name="text_reviews_count" type="xsd:int"/>
+                        <element name="publication_date" type="xsd:string"/>
+                        <element name="publisher" type="xsd:int"/>
+                    </choice>
+                </complexType>
+            </element>
+        </schema>
+    </types>
+    <!--  response messages  -->
+    <message name="returns_book">
+        <part name="book" type="xsd:anyType"/>
+    </message>
+    <message name="returns_name">
+        <part name="name" type="xsd:string"/>
+    </message>
+    <message name="returns_array">
+        <part name="array" type="xsd:array"/>
+    </message>
+    <!--  request messages  -->
+    <message name="hello">
+        <part name="name" type="xsd:string"/>
+    </message>
+    <message name="id">
+        <part name="id" type="xsd:int"/>
+    </message>
+    <message name="limit">
+        <part name="limit" type="xsd:int"/>
+    </message>
+    <message name="newBook">
+        <part name="title" type="xsd:string"/>
+        <part name="authors" type="xsd:string"/>
+        <part name="average_rating" type="xsd:float"/>
+        <part name="isbn" type="xsd:string"/>
+        <part name="isbn13" type="xsd:string"/>
+        <part name="language_code" type="xsd:string"/>
+        <part name="num_pages" type="xsd:int"/>
+        <part name="ratings_count" type="xsd:int"/>
+        <part name="text_reviews_count" type="xsd:int"/>
+        <part name="publication_date" type="xsd:string"/>
+        <part name="publisher" type="xsd:int"/>
+    </message>
+    <message name="updateBook">
+        <part name="id" type="xsd:int" />
+        <part name="title" type="xsd:string"/>
+        <part name="authors" type="xsd:string"/>
+        <part name="average_rating" type="xsd:float"/>
+        <part name="isbn" type="xsd:string"/>
+        <part name="isbn13" type="xsd:string"/>
+        <part name="language_code" type="xsd:string"/>
+        <part name="num_pages" type="xsd:int"/>
+        <part name="ratings_count" type="xsd:int"/>
+        <part name="text_reviews_count" type="xsd:int"/>
+        <part name="publication_date" type="xsd:string"/>
+        <part name="publisher" type="xsd:int"/>
+    </message>
+    <!--  server's services  -->
+    <portType name="DataServicePort">
+        <operation name="hello">
+            <input message="tns:hello"/>
+            <output message="tns:returns_name"/>
+        </operation>
+        <operation name="getAll">
+            <input message="tns:limit"/>
+            <output message="tns:returns_array"/>
+        </operation>
+        <operation name="getBook">
+            <input message="tns:id"/>
+            <output message="tns:returns_book"/>
+        </operation>
+        <operation name="saveBook">
+            <input message="tns:newBook"/>
+            <output message="tns:returns_book"/>
+        </operation>
+        <operation name="updateBook">
+            <input message="tns:updateBook"/>
+            <output message="tns:returns_book"/>
+        </operation>
+    </portType>
+    <!--  server encoding  -->
+    <binding name="DataServiceBinding" type="tns:DataServicePort">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="hello">
+            <soap:operation soapAction="urn:xmethods-delayed-quotes#hello"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getAll">
+            <soap:operation soapAction="urn:xmethods-delayed-quotes#getAll"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getBook">
+            <soap:operation soapAction="urn:xmethods-delayed-quotes#getBook"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="saveBook">
+            <soap:operation soapAction="urn:xmethods-delayed-quotes#saveBook"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="updateBook">
+            <soap:operation soapAction="urn:xmethods-delayed-quotes#updateBook"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+    <!--  access to service provider  -->
+    <service name="DataService">
+        <port name="DataServicePort" binding="tns:DataServiceBinding">
+            <soap:address location="http://localhost/soap/"/>
+        </port>
+    </service>
+</definitions>
