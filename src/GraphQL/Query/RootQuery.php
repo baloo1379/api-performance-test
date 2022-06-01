@@ -34,4 +34,13 @@ class RootQuery
     {
         return $this->dataService->getSong($id);
     }
+
+    /**
+     * @GQL\Field(name="all", type="All")
+     * @GQL\Arg(name="limit", type="Int")
+     */
+    public function all(int $limit = 100): array
+    {
+        return ['books' => $this->dataService->getAllBooks($limit), 'songs' => $this->dataService->getAllSongs($limit)];
+    }
 }

@@ -30,3 +30,8 @@ type Song {
     spch: Int
     pop: Int
 }
+
+type All {
+    books: [Book]
+    songs: [Song]
+}
