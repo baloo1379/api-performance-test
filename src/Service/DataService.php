@@ -3,11 +3,10 @@
 namespace App\Service;
 
 use App\Entity\Book;
+use App\Entity\Song;
 use App\Repository\BookRepository;
 use App\Repository\SongRepository;
-use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class DataService
@@ -40,28 +39,16 @@ class DataService
         return $this->bookRepository->find($id);
     }
 
-    public function saveBook(mixed $requestBody): int
+    public function getSong(int $id): ?Song
     {
-        $entityManager = $this->doctrine->getManager();
-
-        /** @var Book $book */
-        $book = $this->serializer->deserialize($requestBody, Book::class, 'json');
-
-        $entityManager->persist($book);
-        $entityManager->flush();
-
-        return $book->getId();
+        return $this->songRepository->find($id);
     }
 
-    public function updateBook(Book $book, mixed $requestBody): Book
+    public function saveBook(Book $book): Book
     {
-        $entityManager = $this->doctrine->getManager();
-
-        $this->serializer->deserialize($requestBody, Book::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $book]);
-
-        $entityManager->persist($book);
-        $entityManager->flush();
+        $this->bookRepository->add($book, true);
 
         return $book;
     }
+
 }

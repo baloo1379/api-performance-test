@@ -4,23 +4,19 @@ namespace App\GraphQL\Query;
 
 use App\Entity\Book;
 use App\Entity\Song;
-use App\Repository\BookRepository;
-use App\Repository\SongRepository;
+use App\Service\DataService;
 use Overblog\GraphQLBundle\Annotation as GQL;
-use Psr\Log\LoggerInterface;
 
 /**
  * @GQL\Type
  */
 class RootQuery
 {
-    private BookRepository $bookRepository;
-    private SongRepository $songRepository;
+    private DataService $dataService;
 
-    public function __construct(BookRepository $bookRepository, SongRepository $songRepository)
+    public function __construct(DataService $dataService)
     {
-        $this->bookRepository = $bookRepository;
-        $this->songRepository = $songRepository;
+        $this->dataService = $dataService;
     }
 
     /**
@@ -28,7 +24,7 @@ class RootQuery
      */
     public function book(int $id): ?Book
     {
-        return $this->bookRepository->find($id);
+        return $this->dataService->getBook($id);
     }
 
     /**
@@ -36,6 +32,6 @@ class RootQuery
      */
     public function song(int $id): ?Song
     {
-        return $this->songRepository->find($id);
+        return $this->dataService->getSong($id);
     }
 }

@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Service\DataService;
-use Doctrine\ORM\EntityNotFoundException;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -52,19 +55,23 @@ class RestController extends AbstractController
     /**
      * @Route("/book", name="saveBook", methods={"POST"})
      */
-    public function saveBook(DataService $dataService, Request $request): Response
+    public function saveBook(DataService $dataService, Request $request, SerializerInterface $serializer): Response
     {
         $requestBody = $request->getContent();
 
-        $id = $dataService->saveBook($requestBody);
+        $book = $serializer->deserialize($requestBody, Book::class, 'json', [AbstractObjectNormalizer::SKIP_NULL_VALUES => false]);
 
-        return new JsonResponse(['id' => $id]);
+        $book = $dataService->saveBook($book);
+
+        $response = $serializer->serialize($book, 'json', [AbstractObjectNormalizer::SKIP_NULL_VALUES => false]);
+
+        return JsonResponse::fromJsonString($response);
     }
 
     /**
      * @Route("/book/{id}", name="updateBook", requirements={"id"="\d+"}, methods={"PUT"})
      */
-    public function updateBook(DataService $dataService, SerializerInterface $serializer, Request $request, int $id): Response
+    public function updateBook(DataService $dataService, SerializerInterface $serializer, LoggerInterface $logger, Request $request, int $id): Response
     {
         $requestBody = $request->getContent();
 
@@ -73,9 +80,11 @@ class RestController extends AbstractController
             return new JsonResponse(['error' => 'Entity "Book" of id ['.$id.'] not found'], 404);
         }
 
-        $book = $dataService->updateBook($book, $requestBody);
+        $serializer->deserialize($requestBody, Book::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $book, AbstractObjectNormalizer::SKIP_NULL_VALUES => false]);
 
-        $response = $serializer->serialize($book, 'json');
+        $book = $dataService->saveBook($book);
+
+        $response = $serializer->serialize($book, 'json', [AbstractObjectNormalizer::SKIP_NULL_VALUES => false]);
 
         return JsonResponse::fromJsonString($response);
 
