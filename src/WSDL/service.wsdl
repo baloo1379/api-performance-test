@@ -80,7 +80,7 @@
         <part name="ratings_count" type="xsd:int"/>
         <part name="text_reviews_count" type="xsd:int"/>
         <part name="publication_date" type="xsd:string"/>
-        <part name="publisher" type="xsd:int"/>
+        <part name="publisher" type="xsd:string"/>
     </message>
     <!--  server's services  -->
     <portType name="DataServicePort">

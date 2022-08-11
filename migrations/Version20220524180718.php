@@ -32,7 +32,7 @@ final class Version20220524180718 extends AbstractMigration
             ratings_count INT DEFAULT NULL, 
             text_reviews_count INT DEFAULT NULL, 
             publication_date VARCHAR(255) DEFAULT NULL, 
-            publisher INT DEFAULT NULL, 
+            publisher VARCHAR(255) DEFAULT NULL,
             PRIMARY KEY(id)
         ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = MYISAM');
     }

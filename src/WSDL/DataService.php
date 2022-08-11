@@ -48,7 +48,7 @@ class DataService
         ?int $ratings_count,
         ?int $text_reviews_count,
         ?string $publication_date,
-        ?int $publisher,
+        ?string $publisher,
     ): Book
     {
         $entityManager = $this->doctrine->getManager();
@@ -84,7 +84,7 @@ class DataService
         ?int $ratings_count,
         ?int $text_reviews_count,
         ?string $publication_date,
-        ?int $publisher,
+        ?string $publisher,
     ): ?Book
     {
         $entityManager = $this->doctrine->getManager();

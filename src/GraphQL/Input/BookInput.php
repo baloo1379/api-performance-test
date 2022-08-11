@@ -226,17 +226,17 @@ class BookInput
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getPublisher(): ?int
+    public function getPublisher(): ?string
     {
         return $this->publisher;
     }
 
     /**
-     * @param int|null $publisher
+     * @param string|null $publisher
      */
-    public function setPublisher(?int $publisher): void
+    public function setPublisher(?string $publisher): void
     {
         $this->publisher = $publisher;
     }

@@ -10,7 +10,7 @@ type Book {
     ratings_count: Int
     text_reviews_count: Int
     publication_date: String
-    publisher: Int
+    publisher: String
 }
 
 type Song {
