@@ -92,6 +92,10 @@
             <input message="tns:limit"/>
             <output message="tns:returns_array"/>
         </operation>
+        <operation name="getBooks">
+            <input message="tns:limit"/>
+            <output message="tns:returns_array"/>
+        </operation>
         <operation name="getBook">
             <input message="tns:id"/>
             <output message="tns:returns_book"/>
@@ -121,6 +125,17 @@
         </operation>
         <operation name="getAll">
             <soap:operation soapAction="urn:xmethods-delayed-quotes#getAll"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="getBooks">
+            <soap:operation soapAction="urn:xmethods-delayed-quotes#getBooks"/>
             <input>
                 <soap:body use="encoded" namespace="urn:xmethods-delayed-quotes"
                            encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>

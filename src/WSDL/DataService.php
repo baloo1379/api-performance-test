@@ -32,6 +32,13 @@ class DataService
         return ['books' => $books, 'songs' => $songs];
     }
 
+    public function getBooks(int $limit): array
+    {
+        $books = $this->dataService->getAllBooks($limit);
+
+        return ['books' => $books];
+    }
+
     public function getBook(int $id): ?Book
     {
         return $this->dataService->getBook($id);

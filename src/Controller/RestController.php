@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Service\DataService;
+use JMS\Serializer\SerializerBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,16 +23,36 @@ class RestController extends AbstractController
     /**
      * @Route("/all", name="all", methods={"GET","HEAD"})
      */
-    public function all(DataService $dataService, SerializerInterface $serializer, Request $request): Response
+    public function all(DataService $dataService, Request $request): Response
     {
         $limit = $request->query->get('limit');
 
-        $books = $dataService->getAllBooks($limit);
-        $songs = $dataService->getAllSongs($limit);
+        $books = $dataService->getAllBooks($limit ?? 100);
+        $songs = $dataService->getAllSongs($limit ?? 100);
+
+        $serializer = SerializerBuilder::create()->build();
 
         $response = $serializer->serialize([
             'books' => $books,
             'songs' => $songs
+        ], 'json');
+
+        return JsonResponse::fromJsonString($response);
+    }
+
+    /**
+     * @Route("/book", name="getBooks", methods={"GET","HEAD"})
+     */
+    public function allBooks(DataService $dataService, Request $request): Response
+    {
+        $limit = $request->query->get('limit');
+
+        $books = $dataService->getAllBooks($limit ?? 100);
+
+        $serializer = SerializerBuilder::create()->build();
+
+        $response = $serializer->serialize([
+            'books' => $books,
         ], 'json');
 
         return JsonResponse::fromJsonString($response);
