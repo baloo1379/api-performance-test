@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d86023b8a98c1623eb8c41ac0be76344",
+    "content-hash": "1588b109fb99ff11a7438ec9fb317471",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1814,16 +1814,16 @@
         },
         {
             "name": "overblog/graphql-bundle",
-            "version": "v0.15.0",
+            "version": "v0.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphQLBundle.git",
-                "reference": "1c0f57951578d036c90443b9650fb728fc569b9a"
+                "reference": "bf90bae01f079e02f9d2a1cf75f06ab5e602707d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/1c0f57951578d036c90443b9650fb728fc569b9a",
-                "reference": "1c0f57951578d036c90443b9650fb728fc569b9a",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/bf90bae01f079e02f9d2a1cf75f06ab5e602707d",
+                "reference": "bf90bae01f079e02f9d2a1cf75f06ab5e602707d",
                 "shasum": ""
             },
             "require": {
@@ -1907,9 +1907,9 @@
             ],
             "support": {
                 "issues": "https://github.com/overblog/GraphQLBundle/issues",
-                "source": "https://github.com/overblog/GraphQLBundle/tree/v0.15.0"
+                "source": "https://github.com/overblog/GraphQLBundle/tree/v0.15.1"
             },
-            "time": "2022-05-24T06:56:29+00:00"
+            "time": "2022-07-05T07:30:54+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

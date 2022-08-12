@@ -61,9 +61,9 @@ class BookInput
     private ?string $publication_date;
 
     /**
-     * @GQL\Field(type="Int")
+     * @GQL\Field(type="String")
      */
-    private ?int $publisher;
+    private ?string $publisher;
 
     /**
      * @return string|null

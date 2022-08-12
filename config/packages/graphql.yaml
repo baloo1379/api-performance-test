@@ -11,3 +11,6 @@ overblog_graphql:
                 -   type: annotation
                     dir: "%kernel.project_dir%/src/GraphQL"
                     suffix: ~
+        use_classloader_listener: false
+        auto_compile: true
+        cache_dir: "%kernel.project_dir%/var/cache/graphql_types"

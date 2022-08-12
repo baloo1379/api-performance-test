@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Service\DataService;
+use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,7 +91,7 @@ class RestController extends AbstractController
     }
 
     /**
-     * @Route("/book/{id}", name="updateBook", requirements={"id"="\d+"}, methods={"PUT"})
+     * @Route("/book/{id}", name="updateBook", requirements={"id"="\d+"}, methods={"PATCH"})
      */
     public function updateBook(DataService $dataService, SerializerInterface $serializer, LoggerInterface $logger, Request $request, int $id): Response
     {
